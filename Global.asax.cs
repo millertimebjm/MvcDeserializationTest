@@ -12,8 +12,6 @@ namespace MvcDeserializationTest
     {
         protected void Application_Start()
         {
-            System.Web.Mvc.MvcHandler.DisableMvcResponseHeader = true;
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
