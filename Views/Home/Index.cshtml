@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>Mvc Deserialization Test</h1>
+<h2>Single JSON key</h2>
+<input type="text" id="validText" value="valid1234"/><button id="validJson">Valid JSON</button>
+
+<br/>
+<br />
+<h2>Duplicate JSON keys ("orderId","orderID")</h2>
+<input type="text" id="invalidText" value="invalid5678" /><button id="invalidJson">Invalid JSON</button>
+
+<br/>
+<br/>
+
+<div id="errorDiv"></div>
+
+<script type="text/javascript">
+    document.getElementById("validJson").onclick = function (e) {
+        var data = {
+            "orderId": document.getElementById("validText").value
+        };
+        callFetch(data);
+    }
+    document.getElementById("invalidJson").onclick = function (e) {
+        var data = {
+            "orderId": document.getElementById("invalidText").value,
+            "orderID": document.getElementById("invalidText").value
+        };
+        callFetch(data);
+    }
+    function callFetch(data) {
+        fetch("/Home/GetOrder", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.text())
+            .then(html => document.getElementById("errorDiv").innerHTML = html)
+            .catch(error => console.log("Error " + error));
+    }
+</script>
