@@ -4,14 +4,18 @@ Testing and Proof of Concept about MVC deserialization issues caused by a JSON o
 
 In this example, I'm showing that "orderId" and "orderID" break MVC's deserialization when trying to deserialize into a data model containing a property called "OrderId".  
 
-`{
+```
+{
   "orderId": "invalidJson",
   "orderID": "invalidJson"
-}`
+}
+```
 
-`public class Order 
+```
+public class Order 
 {
   public string OrderId { get; set; }
-}`
+}
+```
 
 https://mvcdeserializationtest.azurewebsites.net/
